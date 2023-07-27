@@ -6,5 +6,6 @@ namespace Config.Characters {
         public float maxHP;
         public float speed;
         public float shootValue;
+        public bool isDead;
     }
 }
