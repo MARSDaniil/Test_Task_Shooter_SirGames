@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Config.Characters;
+using Game;
+
 namespace Game.Characters {
 
     public abstract class Character: MonoBehaviour {
@@ -12,10 +14,14 @@ namespace Game.Characters {
         public bool Inited { get; private set; }
         public float DamageValue { get; protected set; }
 
-        public void Init() {
+
+
+        public virtual void Init() {
             MaxHP = charactersConfig.maxHP;
             HP = MaxHP;
             DamageValue = charactersConfig.shootValue;
+            IsDead = charactersConfig.isDead;
+            
         }
     }
 

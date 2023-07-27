@@ -27,7 +27,7 @@ namespace Game.Characters.Components {
         }
 
         public virtual void StopMovement() {
-            Direction = Vector2.zero;
+            Direction = Vector3.zero;
       //      IsMoving.Value = false;
             if (_rigidbody) _rigidbody.velocity = Vector3.zero;
         //    DirectionChanged?.Invoke(Direction);
