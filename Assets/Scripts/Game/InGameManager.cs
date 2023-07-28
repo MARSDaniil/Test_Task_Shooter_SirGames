@@ -16,17 +16,30 @@ namespace Game {
 
         private void Init() {
             if (player == null) FindPlayer();
-            
+
         }
 
         // Update is called once per frame
         void Update() {
-            player.SetVectorByJoystic(_inGameUIManager.joystickManager.Direction);
-        }
+            /*
+            if (_inGameUIManager.joystickManager.Direction != new Vector2(0, 0)) player.SetShootManagerAvailible(false);
+            else player.SetShootManagerAvailible(true);
+            */
+            if (_inGameUIManager.joystickManager.Direction == new Vector2(0, 0) && Input.GetMouseButtonDown(0)) {
+                player.SetShootManagerAvailible(true);
+            }
+            else {
+                player.SetShootManagerAvailible(false);
+            }
 
+                player.SetVectorByJoystic(_inGameUIManager.joystickManager.Direction);
+        }
         void FindPlayer() {
             var player = GameObject.FindGameObjectsWithTag("Player");
-            if(player == null)  Debug.LogError($"{player} doesn't contain Player!");
+            if (player == null) Debug.LogError($"{player} doesn't contain Player!");
         }
     }
 }
+    
+    
+    

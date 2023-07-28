@@ -6,7 +6,9 @@ namespace Game.Weapons.Bullet {
     [RequireComponent(typeof(Rigidbody))]
     public class Bullet : Movement {
         private void Update() {
-            Direction = new Vector3(1, 0, 1);
         }
+
+        public void SetDirectionOfBullet(Vector3 value) => Direction = value;
+
     }
 }
