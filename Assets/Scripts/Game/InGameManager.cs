@@ -25,14 +25,16 @@ namespace Game {
             if (_inGameUIManager.joystickManager.Direction != new Vector2(0, 0)) player.SetShootManagerAvailible(false);
             else player.SetShootManagerAvailible(true);
             */
-            if (_inGameUIManager.joystickManager.Direction == new Vector2(0, 0) && Input.GetMouseButtonDown(0)) {
+            if (_inGameUIManager.joystickManager.Direction == new Vector2(0, 0) 
+                && Input.GetKeyDown(KeyCode.Space)
+                ) {
                 player.SetShootManagerAvailible(true);
             }
             else {
                 player.SetShootManagerAvailible(false);
             }
 
-                player.SetVectorByJoystic(_inGameUIManager.joystickManager.Direction);
+                player.SetVectorByJoystick(_inGameUIManager.joystickManager.Direction);
         }
         void FindPlayer() {
             var player = GameObject.FindGameObjectsWithTag("Player");
