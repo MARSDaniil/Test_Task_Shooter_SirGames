@@ -6,12 +6,14 @@ using UI.InGame;
 
 namespace Game {
     public class InGameManager :MonoBehaviour {
+        public bool HasStarted { get; private set; }
 
         [SerializeField] Player player;
         public InGameUIManager _inGameUIManager;
 
         void Awake() {
             Init();
+            HasStarted = true;
         }
 
         private void Init() {
@@ -39,6 +41,13 @@ namespace Game {
         void FindPlayer() {
             var player = GameObject.FindGameObjectsWithTag("Player");
             if (player == null) Debug.LogError($"{player} doesn't contain Player!");
+        }
+
+        public void FreezeGame() {
+            Time.timeScale = 0;
+        }
+        public void UnfreezeGame() {
+            Time.timeScale = 1;
         }
     }
 }

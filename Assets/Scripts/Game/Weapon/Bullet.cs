@@ -19,6 +19,9 @@ namespace Game.Weapons.Bullet {
             yield return new WaitForSeconds(timeOfLife);
             gameObject.SetActive(false);
         }
-
+        private void OnCollisionEnter(Collision collision) {
+            gameObject.SetActive(false);
+        }
+        
     }
 }
