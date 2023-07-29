@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Characters.Player;
+using Game.Field;
 using UI.InGame;
 
 namespace Game {
     public class InGameManager :MonoBehaviour {
         public bool HasStarted { get; private set; }
 
-        [SerializeField] Player player;
-        public InGameUIManager _inGameUIManager;
+        
 
+        [SerializeField] Player player;
+        [SerializeField] GameFieldManger fieldManger;
+        public Vector2Int sizeOfField;
+        public int CountOfObstacle;
+
+        public InGameUIManager _inGameUIManager;
+        
         void Awake() {
             Init();
             HasStarted = true;
