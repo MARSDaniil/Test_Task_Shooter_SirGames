@@ -21,7 +21,7 @@ namespace Game.Characters.Components {
            // level = GetComponentInParent<Level>();
          //   speed.BaseValue = movementConfig.baseSpeed;
             _rigidbody = GetComponent<Rigidbody>();
-            StopMovement();
+            //StopMovement();
             //  Speed = charactersConfig.speed;
             Speed = 1f;
         }
