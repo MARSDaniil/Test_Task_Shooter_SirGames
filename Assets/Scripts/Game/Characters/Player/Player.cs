@@ -18,9 +18,6 @@ namespace Game.Characters.Player {
             _shootManager = GetComponent<ShootManager>();
             _rotate = GetComponentInChildren<Rotate>();
             
-            if(_rotate == null) {
-                Debug.LogError("rotate null");
-            }
             //base.Init();
         }
         public void SetVectorByJoystick(Vector2 value) {

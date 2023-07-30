@@ -8,24 +8,30 @@ using UI.InGame;
 namespace Game {
     public class InGameManager :MonoBehaviour {
         public bool HasStarted { get; private set; }
+        public bool isStartGameClose { get;  set; }
 
-        
-
-        [SerializeField] Player player;
+        [Header("Player")]
+        [SerializeField] GameObject PlayerGameObject;
+        Player player;
+        [Header("Field")]
         [SerializeField] GameFieldManger fieldManger;
         public Vector2Int sizeOfField;
         public int CountOfObstacle;
 
         public InGameUIManager _inGameUIManager;
         
+        public List<Vector3> occupiedPositions;
+        [Header("Mobs")]
+        [SerializeField] MobGenerator mobGenerator;
+
         void Awake() {
             Init();
             HasStarted = true;
         }
 
         private void Init() {
+            player = PlayerGameObject.GetComponent<Player>();
             if (player == null) FindPlayer();
-
         }
 
         // Update is called once per frame
@@ -34,20 +40,22 @@ namespace Game {
             if (_inGameUIManager.joystickManager.Direction != new Vector2(0, 0)) player.SetShootManagerAvailible(false);
             else player.SetShootManagerAvailible(true);
             */
-            if (_inGameUIManager.joystickManager.Direction == new Vector2(0, 0) 
-                && Input.GetKeyDown(KeyCode.Space)
-                ) {
-                player.SetShootManagerAvailible(true);
+            if (isStartGameClose) {
+                if (_inGameUIManager.joystickManager.Direction == new Vector2(0, 0)
+                    && Input.GetKeyDown(KeyCode.Space)
+                    ) {
+                    player.SetShootManagerAvailible(true);
+                }
+                else {
+                    player.SetShootManagerAvailible(false);
+                }
             }
-            else {
-                player.SetShootManagerAvailible(false);
-            }
-
-                player.SetVectorByJoystick(_inGameUIManager.joystickManager.Direction);
+            player.SetVectorByJoystick(_inGameUIManager.joystickManager.Direction);
         }
         void FindPlayer() {
-            var player = GameObject.FindGameObjectsWithTag("Player");
-            if (player == null) Debug.LogError($"{player} doesn't contain Player!");
+            PlayerGameObject = GameObject.FindGameObjectWithTag("Player");
+            player = PlayerGameObject.GetComponent<Player>();
+            if (PlayerGameObject == null) Debug.LogError($"{player} doesn't contain Player!");
         }
 
         public void FreezeGame() {

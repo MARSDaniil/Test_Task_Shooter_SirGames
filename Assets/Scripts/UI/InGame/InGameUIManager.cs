@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Game;
 using UI.Pause;
+using UI.StartGameUI;
 namespace UI.InGame {
     public class InGameUIManager :MonoBehaviour {
         [Header("Input")]
@@ -15,8 +16,8 @@ namespace UI.InGame {
 
         [Header("PauseMenu")]
         public PauseMenuUI pauseMenuUI;
-
-
+        public StartGame startGame;
+        [HideInInspector]
 
         InGameManager _inGameManager;
 
@@ -31,12 +32,14 @@ namespace UI.InGame {
         }
         private void Init() {
             openPauseMenuButton.onClick.AddListener(OnOpenPauseMenuClicked);
-            if (pauseMenuUI != null) {
-                pauseMenuUI.Init();
+            if (pauseMenuUI != null) pauseMenuUI.Init();
+            if (startGame != null) {
+                startGame.Open();
+                startGame.Init();
             }
         }
 
-        void OnOpenPauseMenuClicked() {
+            void OnOpenPauseMenuClicked() {
             pauseMenuUI.Open();
             FreezeGame();
         }

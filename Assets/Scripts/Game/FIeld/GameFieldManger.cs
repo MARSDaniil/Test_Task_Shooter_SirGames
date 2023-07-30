@@ -6,7 +6,7 @@ namespace Game.Field {
     public class GameFieldManger :MonoBehaviour {
         InGameManager _inGameManager;
         [SerializeField] private GameObject plane;
-
+        [SerializeField] private GameObject backgroundPlane;
         [SerializeField] GameObject PlayerGameObject;
         Player player;
 
@@ -34,6 +34,9 @@ namespace Game.Field {
             sizeOfPlane = _inGameManager.sizeOfField;
             plane.transform.localScale = new Vector3(sizeOfPlane.y / (10), 1, sizeOfPlane.x / (10));
             plane.transform.position = new Vector3(0 , 0, sizeOfPlane.x / 2 );
+
+            backgroundPlane.transform.localScale = new Vector3(sizeOfPlane.y, 1, sizeOfPlane.x);
+            backgroundPlane.transform.position = new Vector3(0, -0.2f, sizeOfPlane.x / 2);
 
             PlayerGameObject.transform.position = new Vector3(0,
                 PlayerGameObject.transform.localScale.y,
