@@ -42,8 +42,6 @@ namespace Game.Characters.Player {
             }
             if (HP <= 0) IsDead = true;
         }
-        private void Update() {
-            Debug.Log("HP of player ==" + HP);
-        }
+
     }
 }

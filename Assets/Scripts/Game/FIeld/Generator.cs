@@ -17,7 +17,7 @@ namespace Game.Field {
         protected void SetItem(ref GameObject[] gameObjects, int count, GameObject gameObject = null,bool randomNum = false, List<GameObject> obstaclePrefabsList = null, float hight = 0) {
             gameObjects = new GameObject[count];
             for (int i = 0; i < count; i++) {
-                Vector3 coord = GenerateRandomVectorInt(sizeOfPlane,hight);
+                Vector3 coord = GenerateRandomVectorInt(sizeOfPlane,hight,false,_inGameManager);
                 if (randomNum) {
                     int num = GenerateRandomNumOfList(obstaclePrefabsList.Count);
                     gameObjects[i] = Instantiate(obstaclePrefabsList[num], coord, Quaternion.identity);
@@ -27,25 +27,25 @@ namespace Game.Field {
 
         }
         protected int GenerateRandomNumOfList(int lenghtOfList) => (Random.Range(0, lenghtOfList));
-        protected Vector3 GenerateRandomVectorInt(Vector2Int size, float hight = 0) {
+        public Vector3 GenerateRandomVectorInt(Vector2Int size, float hight = 0, bool needAddToList = false,InGameManager inGameManager = null) {
             bool isFree = false;
             Vector3 vector3 = new Vector3(0, hight, 0);
             while (!isFree) {
                 vector3.x = Random.Range(-size.y / 2 + 1, size.y / 2);
                 vector3.z = Random.Range(size.x / 3, size.x);
 
-                if (_inGameManager.occupiedPositions.Count == 0) isFree = true;
+                if (inGameManager.occupiedPositions.Count == 0) isFree = true;
                 int i = 0;
-                while (i < _inGameManager.occupiedPositions.Count && !isFree) {
-                    if (vector3.x == _inGameManager.occupiedPositions[i].x &&
-                        vector3.z == _inGameManager.occupiedPositions[i].z) {
+                while (i < inGameManager.occupiedPositions.Count && !isFree) {
+                    if (vector3.x == inGameManager.occupiedPositions[i].x &&
+                        vector3.z == inGameManager.occupiedPositions[i].z) {
                         break;
                     }
-                    if (i == _inGameManager.occupiedPositions.Count - 1) isFree = true;
+                    if (i == inGameManager.occupiedPositions.Count - 1) isFree = true;
                     i++;
                 }
             }
-            _inGameManager.occupiedPositions.Add(vector3);
+            if(!needAddToList) inGameManager.occupiedPositions.Add(vector3);
             return (vector3);
         }
     }

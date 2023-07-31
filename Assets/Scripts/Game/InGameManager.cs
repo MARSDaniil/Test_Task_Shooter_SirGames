@@ -8,7 +8,7 @@ using CameraManagerNS;
 namespace Game {
     public class InGameManager :MonoBehaviour {
         public bool HasStarted { get; private set; }
-        public bool isStartGameClose { get;  set; }
+        public bool isStartGameClose { get; set; }
 
         [Header("Player")]
         public GameObject PlayerGameObject;
@@ -20,7 +20,7 @@ namespace Game {
         public int CountOfObstacle;
 
         public InGameUIManager _inGameUIManager;
-        
+
         public List<Vector3> occupiedPositions;
         [Header("Mobs")]
         [SerializeField] MobGenerator mobGenerator;
@@ -54,15 +54,15 @@ namespace Game {
                 }
                 player.SetVectorByJoystick(_inGameUIManager.joystickManager.Direction);
             }
-            if(mobGenerator.countOfBirds <= 0 && mobGenerator.countOfRunners <= 0) {
+            if (mobGenerator.countOfBirds <= 0 && mobGenerator.countOfRunners <= 0) {
                 _inGameUIManager.GameOver("u win");
                 isStartGameClose = false;
             }
-            if(player.IsDead == true) {
+            if (player.IsDead == true) {
                 _inGameUIManager.GameOver("u loose");
                 isStartGameClose = false;
             }
-           
+
         }
         void FindPlayer() {
             PlayerGameObject = GameObject.FindGameObjectWithTag("Player");
@@ -76,8 +76,15 @@ namespace Game {
         public void UnfreezeGame() {
             Time.timeScale = 1;
         }
-        public void MinusRunner() => mobGenerator.countOfRunners--;
-        public void MinusBird() => mobGenerator.countOfBirds--;
+        public void MinusRunner() {
+            mobGenerator.countOfRunners--;
+            _inGameUIManager.PlusCoin();
+        }
+
+        public void MinusBird() {
+            mobGenerator.countOfBirds--;
+            _inGameUIManager.PlusCoin();
+        }
     }
 }
     
