@@ -30,7 +30,6 @@ namespace Game.Field {
 
         private void Init() {
 
-
             sizeOfPlane = _inGameManager.sizeOfField;
             plane.transform.localScale = new Vector3(sizeOfPlane.y / (10), 1, sizeOfPlane.x / (10));
             plane.transform.position = new Vector3(0 , 0, sizeOfPlane.x / 2 );

@@ -11,8 +11,11 @@ namespace Game {
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] Transform firePoint;
         private Vector3 DirectrionOfPlayer;
+        private float timeBetweenShoots;
+        
         private void Update() {
             if (_canShoot) Shoot();
+
         }
 
         private void Shoot() {
@@ -34,7 +37,6 @@ namespace Game {
                 _bulletsList.Add(_bulletsListGameObject[_bulletsListGameObject.Count - 1].GetComponent<Bullet>());
                 _bulletsList[_bulletsList.Count-1].SetDirectionOfBullet(DirectrionOfPlayer);
             }
-           
         }
 
         public void SetAvailibleOfShoot(bool value) => _canShoot = value;
@@ -42,5 +44,9 @@ namespace Game {
             DirectrionOfPlayer.x = value.x;
             DirectrionOfPlayer.z = value.y;
         }
+
+
+        public void SetTimeBetweenShoots(float value) => timeBetweenShoots = value;
+       
     }
 }

@@ -31,7 +31,7 @@ namespace Game.Field {
             
             SetWalls();
             //SetObstacle();
-            SetItem(ref obstacleList, _inGameManager.CountOfObstacle,null, true, obstaclePrefabsList);
+            SetItem(ref obstacleList, _inGameManager.CountOfObstacle,null, true, obstaclePrefabsList,0.5f);
             yield return null;
 
             navMeshSurface.BuildNavMesh();
@@ -59,14 +59,7 @@ namespace Game.Field {
                 new Vector3(0, 0, 0));
         }
 
-        private void SetObstacle() {
-            obstacleList = new GameObject[_inGameManager.CountOfObstacle];
-            for (int i = 0; i < obstacleList.Length; i++) {
-                int num = GenerateRandomNumOfList(obstaclePrefabsList.Count);
-                Vector3 coord = GenerateRandomVectorInt(sizeOfPlane);
-                obstacleList[i] = Instantiate(obstaclePrefabsList[num],coord,Quaternion.identity);
-            }
-        }
+     
 
        
     }

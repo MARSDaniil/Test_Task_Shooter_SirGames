@@ -17,7 +17,10 @@ namespace UI.InGame {
         [Header("PauseMenu")]
         public PauseMenuUI pauseMenuUI;
         public StartGame startGame;
-        [HideInInspector]
+
+        [Header("EndGameMenu")]
+        public GameOverUI gameOverUI;
+
 
         InGameManager _inGameManager;
 
@@ -39,8 +42,14 @@ namespace UI.InGame {
             }
         }
 
-            void OnOpenPauseMenuClicked() {
+        void OnOpenPauseMenuClicked() {
             pauseMenuUI.Open();
+            FreezeGame();
+        }
+
+        public void GameOver(string text) {
+            gameOverUI.Open();
+            gameOverUI.SetGameOverText(text);
             FreezeGame();
         }
 

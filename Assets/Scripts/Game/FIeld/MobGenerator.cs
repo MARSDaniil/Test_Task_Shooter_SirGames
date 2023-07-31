@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Game.Field {
     public class MobGenerator :Generator {
-        [SerializeField] private int countOfRunners;
+        public int countOfRunners;
         [SerializeField] private GameObject runnerPrefab;
-        [SerializeField] private int countOfBirds;
+        public int countOfBirds;
         [SerializeField] private GameObject birdsPrefab;
         private GameObject[] runnerList;
         private GameObject[] birdList;
@@ -19,7 +19,5 @@ namespace Game.Field {
             SetItem(ref birdList, countOfBirds, birdsPrefab);
         }
 
-        public void MunisRunnerCount() => countOfRunners--;
-        public void MunisBirdCount() => countOfBirds--;
     }
 }

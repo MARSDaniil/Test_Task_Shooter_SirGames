@@ -1,9 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Characters.Player;
 using Game.Field;
 using UI.InGame;
+using CameraManagerNS;
 
 namespace Game {
     public class InGameManager :MonoBehaviour {
@@ -11,10 +11,11 @@ namespace Game {
         public bool isStartGameClose { get;  set; }
 
         [Header("Player")]
-        [SerializeField] GameObject PlayerGameObject;
+        public GameObject PlayerGameObject;
         Player player;
         [Header("Field")]
         [SerializeField] GameFieldManger fieldManger;
+        [SerializeField] ObstacleGenerator obstacleGenerator;
         public Vector2Int sizeOfField;
         public int CountOfObstacle;
 
@@ -24,6 +25,8 @@ namespace Game {
         [Header("Mobs")]
         [SerializeField] MobGenerator mobGenerator;
 
+        [Header("Camera")]
+        [SerializeField] CameraManager cameraManager;
         void Awake() {
             Init();
             HasStarted = true;
@@ -49,8 +52,17 @@ namespace Game {
                 else {
                     player.SetShootManagerAvailible(false);
                 }
+                player.SetVectorByJoystick(_inGameUIManager.joystickManager.Direction);
             }
-            player.SetVectorByJoystick(_inGameUIManager.joystickManager.Direction);
+            if(mobGenerator.countOfBirds <= 0 && mobGenerator.countOfRunners <= 0) {
+                _inGameUIManager.GameOver("u win");
+                isStartGameClose = false;
+            }
+            if(player.IsDead == true) {
+                _inGameUIManager.GameOver("u loose");
+                isStartGameClose = false;
+            }
+           
         }
         void FindPlayer() {
             PlayerGameObject = GameObject.FindGameObjectWithTag("Player");
@@ -64,6 +76,8 @@ namespace Game {
         public void UnfreezeGame() {
             Time.timeScale = 1;
         }
+        public void MinusRunner() => mobGenerator.countOfRunners--;
+        public void MinusBird() => mobGenerator.countOfBirds--;
     }
 }
     

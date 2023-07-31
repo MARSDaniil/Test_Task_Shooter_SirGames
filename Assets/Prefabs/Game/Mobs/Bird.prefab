@@ -201,7 +201,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fc5aacb4ea86d5d4c89e346cf185d0d2, type: 2}
+  - {fileID: 2100000, guid: e3ffb8ca0b77dc845bbe6d3e75e04578, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 9219382104307804818}
   m_Layer: 0
   m_Name: Bird
-  m_TagString: Player
+  m_TagString: Mob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -14,10 +14,10 @@ namespace Game.Field {
             sizeOfPlane = _inGameManager.sizeOfField;
         }
 
-        protected void SetItem(ref GameObject[] gameObjects, int count, GameObject gameObject = null,bool randomNum = false, List<GameObject> obstaclePrefabsList = null) {
+        protected void SetItem(ref GameObject[] gameObjects, int count, GameObject gameObject = null,bool randomNum = false, List<GameObject> obstaclePrefabsList = null, float hight = 0) {
             gameObjects = new GameObject[count];
             for (int i = 0; i < count; i++) {
-                Vector3 coord = GenerateRandomVectorInt(sizeOfPlane);
+                Vector3 coord = GenerateRandomVectorInt(sizeOfPlane,hight);
                 if (randomNum) {
                     int num = GenerateRandomNumOfList(obstaclePrefabsList.Count);
                     gameObjects[i] = Instantiate(obstaclePrefabsList[num], coord, Quaternion.identity);
@@ -27,9 +27,9 @@ namespace Game.Field {
 
         }
         protected int GenerateRandomNumOfList(int lenghtOfList) => (Random.Range(0, lenghtOfList));
-        protected Vector3 GenerateRandomVectorInt(Vector2Int size) {
+        protected Vector3 GenerateRandomVectorInt(Vector2Int size, float hight = 0) {
             bool isFree = false;
-            Vector3 vector3 = new Vector3(0, 0.5f, 0);
+            Vector3 vector3 = new Vector3(0, hight, 0);
             while (!isFree) {
                 vector3.x = Random.Range(-size.y / 2 + 1, size.y / 2);
                 vector3.z = Random.Range(size.x / 3, size.x);
