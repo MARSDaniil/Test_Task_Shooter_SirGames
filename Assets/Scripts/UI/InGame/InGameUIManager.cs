@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using Game;
 using UI.Pause;
 using UI.StartGameUI;
+using TMPro;
+
 namespace UI.InGame {
     public class InGameUIManager :MonoBehaviour {
         [Header("Input")]
@@ -13,8 +15,9 @@ namespace UI.InGame {
 
         [Header("InfoPanel")]
         public Button openPauseMenuButton;
-
-        [Header("PauseMenu")]
+        public TMP_Text cointText;
+        private int coin;
+        [Header("PauseMenuUI")]
         public PauseMenuUI pauseMenuUI;
         public StartGame startGame;
 
@@ -40,6 +43,7 @@ namespace UI.InGame {
                 startGame.Open();
                 startGame.Init();
             }
+            CoinInit();
         }
 
         void OnOpenPauseMenuClicked() {
@@ -52,9 +56,15 @@ namespace UI.InGame {
             gameOverUI.SetGameOverText(text);
             FreezeGame();
         }
-
+        private void CoinInit() {
+            coin = 0;
+            cointText.text = coin.ToString();
+        }
         public void FreezeGame() => _inGameManager.FreezeGame();
         public void UnfreezeGame() => _inGameManager.UnfreezeGame();
-
+        public void PlusCoin() {
+            coin++;
+            cointText.text = coin.ToString();
+        } 
     }
 }

@@ -9,17 +9,18 @@ namespace UI.Pause {
         public Button continuationButton;
 
         InGameUIManager inGameUIManager;
-        public  void Init() {
+
+        public void Init() {
             base.Init();
             inGameUIManager = GetComponentInParent<InGameUIManager>();
             continuationButton.onClick.AddListener(On—ontinuationPauseMenuClicked);
+           
         }
 
         void On—ontinuationPauseMenuClicked() {
             this.Close();
             inGameUIManager.UnfreezeGame();
         }
-     
 
     }
 }

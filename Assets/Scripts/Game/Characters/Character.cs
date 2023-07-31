@@ -24,6 +24,8 @@ namespace Game.Characters {
             Speed = charactersConfig.speed;
             IsDead = charactersConfig.isDead;
         }
+
+
     }
 
 } 

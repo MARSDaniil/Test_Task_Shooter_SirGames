@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Game.Characters.Components;
 namespace Game.Characters.Runner {
-    public class RunnerMovement: MonoBehaviour {
+    public class RunnerMovement:Movement {
         Runner runner;
         NavMeshAgent _navMeshAgent;
         Transform playerPosition;
@@ -10,10 +11,11 @@ namespace Game.Characters.Runner {
 
         public bool isGameStarted = false;
      
-        void FixedUpdate() {
+        public override void FixedUpdate() {
+            base.FixedUpdate();
             if (isGameStarted) {
                 _navMeshAgent.destination = playerPosition.position;
-                if (!DeltaPosition()) {
+                if (!DeltaPosition(playerPosition,shootDistance)) {
                     _rotate.SetDirectionVector(new Vector2(_navMeshAgent.desiredVelocity.x, _navMeshAgent.desiredVelocity.z));
                     runner.canShoot = false;
                 }
@@ -36,18 +38,7 @@ namespace Game.Characters.Runner {
                 Debug.LogError("rotate null");
             }
         }
-        private bool DeltaPosition() {
-            Vector2 vector = DeltaVector();
-            if (Mathf.Abs(vector.x) < shootDistance &&
-                Mathf.Abs(vector.y) < shootDistance) return true;
-            return false;
-        }
-
-        private Vector2 DeltaVector() {
-            float vectorX = -gameObject.transform.position.x + playerPosition.position.x;
-            float vectorZ = -gameObject.transform.position.z + playerPosition.position.z;
-            return new Vector2(vectorX, vectorZ);
-        }
+      
         public void SetShootDistance(float value) => shootDistance = value;
     }
 }
